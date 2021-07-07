@@ -1,0 +1,29 @@
+{
+    "name" : "seffeng/rules",
+    "description" : "PHP Rules",
+    "keywords" : [
+        "PHP",
+        "laravel",
+        "lumen",
+        "seffeng",
+        "Yii2",
+        "rules"
+    ],
+    "license" : "MIT",
+    "homepage" : "https://github.com/seffeng/php-rules",
+    "authors" : [{
+            "name" : "seffeng",
+            "email" : "save.zxf@gmail.com",
+            "homepage" : "https://github.com/seffeng"
+        }
+    ],
+    "require" : {
+        "php" : ">=5.6"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Seffeng\\Rules\\" : "src/"
+        }
+    },
+    "minimum-stability" : "stable"
+}
