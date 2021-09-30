@@ -54,7 +54,7 @@ class IDNumber
     public function passes(string $value)
     {
         if (preg_match($this->regex, $value) === 1) {
-            return $this->compareIDNumber($value);
+            return $this->validBirthday($value) && $this->compareIDNumber($value);
         }
         return false;
     }
@@ -85,5 +85,20 @@ class IDNumber
     protected function compareIDNumber(string $value)
     {
         return strtoupper($value) === (substr($value, 0, 17) . $this->calculateY($value));
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年9月30日
+     * @param string $value
+     * @return boolean
+     */
+    protected function validBirthday(string $value)
+    {
+        $year = substr($value, 6, 4);
+        $month = substr($value, 10, 2);
+        $day = substr($value, 12, 2);
+        return strtotime($year . $month . $day) && (date('t', strtotime($year . $month . '01')) >= $day);
     }
 }
