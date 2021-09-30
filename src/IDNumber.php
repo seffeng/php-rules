@@ -33,6 +33,30 @@ class IDNumber
 
     /**
      *
+     * @var integer
+     */
+    protected $minYear = 1000;
+
+    /**
+     *
+     * @var integer
+     */
+    protected $maxYear = 2999;
+
+    /**
+     *
+     * @var integer
+     */
+    protected $maxMonth = 12;
+
+    /**
+     *
+     * @var integer
+     */
+    protected $maxDay = 31;
+
+    /**
+     *
      * @author zxf
      * @date   2021年7月7日
      * @param string $regex
@@ -99,6 +123,7 @@ class IDNumber
         $year = substr($value, 6, 4);
         $month = substr($value, 10, 2);
         $day = substr($value, 12, 2);
-        return strtotime($year . $month . $day) && (date('t', strtotime($year . $month . '01')) >= $day);
+        return ($year >= $this->minYear && $year <= $this->maxYear && $month <= $this->maxMonth && $day <= $this->maxDay)
+            && strtotime($year . '-' . $month . '-' . $day) && (date('t', strtotime($year . '-' . $month . '-' . '01')) >= $day);
     }
 }
