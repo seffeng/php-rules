@@ -35,7 +35,5 @@ $ composer require seffeng/rules
 
 ### 备注
 
-无
-
-
+1、仅支持大陆18位身份证验证。
 

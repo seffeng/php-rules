@@ -14,6 +14,18 @@ class IDNumber
     protected $regex = '/^\d{17}[0-9x]$/i';
 
     /**
+     *
+     * @var string
+     */
+    protected $value;
+
+    /**
+     *
+     * @var string
+     */
+    protected $location;
+
+    /**
      * 对应位置的加权因子
      * @var array
      */
@@ -77,23 +89,68 @@ class IDNumber
      */
     public function passes(string $value)
     {
-        if (preg_match($this->regex, $value) === 1) {
-            return $this->validBirthday($value) && $this->compareIDNumber($value);
+        $this->setValue($value);
+        if (preg_match($this->regex, $this->getValue()) === 1) {
+            return $this->validBirthday() && $this->validPrefix() && $this->compareIDNumber();
         }
         return false;
     }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年9月30日
+     * @param string $value
+     */
+    protected function setValue(string $value)
+    {
+        $this->value = $value;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年9月30日
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年9月30日
+     * @param string $location
+     */
+    protected function setLocation(string $location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年9月30日
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
     /**
      *
      * @author zxf
      * @date   2021年7月1日
-     * @param string $value
      * @return string
      */
-    protected function calculateY(string $value)
+    protected function calculateY()
     {
         $s = 0;
         for ($i = 0; $i < 17; $i++) {
-            $s += intval($value[$i]) * $this->wi[$i];
+            $s += intval($this->getValue()[$i]) * $this->wi[$i];
         }
         $mod = $s % $this->mod;
         return isset($this->y[$mod]) ? $this->y[$mod] : '';
@@ -103,27 +160,42 @@ class IDNumber
      *
      * @author zxf
      * @date   2021年7月1日
-     * @param string $value
      * @return boolean
      */
-    protected function compareIDNumber(string $value)
+    protected function compareIDNumber()
     {
-        return strtoupper($value) === (substr($value, 0, 17) . $this->calculateY($value));
+        return strtoupper($this->getValue()) === (substr($this->getValue(), 0, 17) . $this->calculateY());
     }
 
     /**
      *
      * @author zxf
      * @date   2021年9月30日
-     * @param string $value
      * @return boolean
      */
-    protected function validBirthday(string $value)
+    protected function validBirthday()
     {
-        $year = substr($value, 6, 4);
-        $month = substr($value, 10, 2);
-        $day = substr($value, 12, 2);
+        $year = substr($this->getValue(), 6, 4);
+        $month = substr($this->getValue(), 10, 2);
+        $day = substr($this->getValue(), 12, 2);
         return ($year >= $this->minYear && $year <= $this->maxYear && $month <= $this->maxMonth && $day <= $this->maxDay)
             && strtotime($year . '-' . $month . '-' . $day) && (date('t', strtotime($year . '-' . $month . '-' . '01')) >= $day);
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年9月30日
+     * @return boolean
+     */
+    protected function validPrefix()
+    {
+        $prefix = substr($this->getValue(), 0, 6);
+        $items = json_decode(file_get_contents(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'idnumber-location.json'), true);
+        if (isset($items[$prefix])) {
+            $this->setLocation($items[$prefix]);
+            return true;
+        }
+        return false;
     }
 }
