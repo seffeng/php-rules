@@ -26,6 +26,12 @@ class IDNumber
     protected $location;
 
     /**
+     *
+     * @var boolean
+     */
+    protected $isStrict = true;
+
+    /**
      * 对应位置的加权因子
      * @var array
      */
@@ -91,7 +97,7 @@ class IDNumber
     {
         $this->setValue($value);
         if (preg_match($this->regex, $this->getValue()) === 1) {
-            return $this->validBirthday() && $this->validPrefix() && $this->compareIDNumber();
+            return $this->validBirthday() && $this->validLocation() && $this->compareIDNumber();
         }
         return false;
     }
@@ -143,6 +149,28 @@ class IDNumber
     /**
      *
      * @author zxf
+     * @date   2021年9月30日
+     * @param bool $strict
+     */
+    public function setIsStrict(bool $isStrict)
+    {
+        $this->isStrict = $isStrict;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年9月30日
+     * @return boolean
+     */
+    public function getIsStrict()
+    {
+        return $this->isStrict;
+    }
+
+    /**
+     *
+     * @author zxf
      * @date   2021年7月1日
      * @return string
      */
@@ -188,12 +216,15 @@ class IDNumber
      * @date   2021年9月30日
      * @return boolean
      */
-    protected function validPrefix()
+    protected function validLocation()
     {
-        $prefix = substr($this->getValue(), 0, 6);
+        if (!$this->getIsStrict()) {
+            return true;
+        }
+        $code = substr($this->getValue(), 0, 6);
         $items = json_decode(file_get_contents(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'idnumber-location.json'), true);
-        if (isset($items[$prefix])) {
-            $this->setLocation($items[$prefix]);
+        if (isset($items[$code])) {
+            $this->setLocation($items[$code]);
             return true;
         }
         return false;
