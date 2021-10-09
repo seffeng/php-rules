@@ -26,7 +26,7 @@ class IDNumber
     protected $location;
 
     /**
-     *
+     * 是否检测地区（前6位）
      * @var boolean
      */
     protected $isStrict = true;
@@ -53,7 +53,7 @@ class IDNumber
      *
      * @var integer
      */
-    protected $minYear = 1000;
+    protected $minYear = 1800;
 
     /**
      *
