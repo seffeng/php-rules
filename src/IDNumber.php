@@ -301,7 +301,7 @@ class IDNumber
         $month = substr($this->getValue(), 10, 2);
         $day = substr($this->getValue(), 12, 2);
         $this->setBirthday($year . '-' . $month . '-' . $day);
-        return ($year >= $this->getMinYear() && $year <= $this->getMaxYear() && $month <= $this->getMaxMonth() && $day <= $this->maxDay)
+        return ($year >= $this->getMinYear() && $year <= $this->getMaxYear() && $month <= $this->getMaxMonth() && $day <= $this->getMaxDay())
             && strtotime($this->getBirthday()) && (date('t', strtotime($year . '-' . $month . '-' . '01')) >= $day);
     }
 
