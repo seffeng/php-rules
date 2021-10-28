@@ -75,6 +75,12 @@ class IDNumber
 
     /**
      *
+     * @var string
+     */
+    protected $birthday;
+
+    /**
+     *
      * @author zxf
      * @date   2021年7月7日
      * @param string $regex
@@ -171,6 +177,94 @@ class IDNumber
     /**
      *
      * @author zxf
+     * @date   2021年10月28日
+     * @param int $year
+     */
+    public function setMinYear(int $year)
+    {
+        $this->minYear = $year;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年10月28日
+     * @return number
+     */
+    public function getMinYear()
+    {
+        return $this->minYear;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年10月28日
+     * @param int $year
+     */
+    public function setMaxYear(int $year)
+    {
+        $this->maxYear = $year;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年10月28日
+     * @return number
+     */
+    public function getMaxYear()
+    {
+        return $this->maxYear;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年10月28日
+     * @param string $birthday
+     */
+    protected function setBirthday(string $birthday)
+    {
+        $this->birthday = $birthday;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年10月28日
+     * @return string
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年10月28日
+     * @return number
+     */
+    public function getMaxMonth()
+    {
+        return $this->maxMonth;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2021年10月28日
+     * @return number
+     */
+    public function getMaxDay()
+    {
+        return $this->maxDay;
+    }
+
+    /**
+     *
+     * @author zxf
      * @date   2021年7月1日
      * @return string
      */
@@ -206,8 +300,9 @@ class IDNumber
         $year = substr($this->getValue(), 6, 4);
         $month = substr($this->getValue(), 10, 2);
         $day = substr($this->getValue(), 12, 2);
-        return ($year >= $this->minYear && $year <= $this->maxYear && $month <= $this->maxMonth && $day <= $this->maxDay)
-            && strtotime($year . '-' . $month . '-' . $day) && (date('t', strtotime($year . '-' . $month . '-' . '01')) >= $day);
+        $this->setBirthday($year . '-' . $month . '-' . $day);
+        return ($year >= $this->getMinYear() && $year <= $this->getMaxYear() && $month <= $this->getMaxMonth() && $day <= $this->maxDay)
+            && strtotime($this->getBirthday()) && (date('t', strtotime($year . '-' . $month . '-' . '01')) >= $day);
     }
 
     /**
