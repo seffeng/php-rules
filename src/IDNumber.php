@@ -8,6 +8,18 @@ namespace Seffeng\Rules;
 class IDNumber
 {
     /**
+     * 性别[男]
+     * @var integer
+     */
+    const GENDER_MALE = 'male';
+
+    /**
+     * 性别[女]
+     * @var integer
+     */
+    const GENDER_FEMALE  = 'female';
+
+    /**
      *
      * @var string
      */
@@ -78,6 +90,12 @@ class IDNumber
      * @var string
      */
     protected $birthday;
+
+    /**
+     *
+     * @var string
+     */
+    protected $gender;
 
     /**
      *
@@ -249,6 +267,49 @@ class IDNumber
     public function getMaxMonth()
     {
         return $this->maxMonth;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2022年3月1日
+     * @return string
+     */
+    public function getGender()
+    {
+        $gender = isset($this->getValue()[16]) ? $this->getValue()[16] : null;
+        if (is_null($gender)) {
+            return '';
+        } elseif ($gender % 2 === 0) {
+            return self::GENDER_FEMALE;
+        } else {
+            return self::GENDER_MALE;
+        }
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2022年3月1日
+     * @return string
+     */
+    public static function fetchGenderItems()
+    {
+        return [
+            self::GENDER_FEMALE => '女',
+            self::GENDER_MALE => '男'
+        ];
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2022年3月1日
+     * @return string
+     */
+    public function getGenderName()
+    {
+        return isset(static::fetchGenderItems()[$this->getGender()]) ? static::fetchGenderItems()[$this->getGender()] : '';
     }
 
     /**
