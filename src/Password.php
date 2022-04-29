@@ -234,12 +234,13 @@ class Password
     {
         $string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $matcharr = str_split($string);
+        $strlen = strlen($string);
         $orgarr = str_split($this->getValue());
 
         foreach ($orgarr as $k => $v) {
             if (isset($orgarr[$k + $this->getMaxNumber()]) && isset($matcharr[$k + $this->getMaxNumber()])) {
                 $findkey = array_search($v, $matcharr);
-                if ($findkey === false) {
+                if ($findkey === false || ($findkey + $this->getMaxNumber()) >= $strlen) {
                     continue;
                 }
                 $match = 0;
