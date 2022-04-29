@@ -37,3 +37,8 @@ $ composer require seffeng/rules
 
 1、仅支持大陆18位身份证验证。
 
+### 更新
+
+* [changelog](./CHANGELOG.md)
+  * 2022-04-29
+  * 2021-10-28

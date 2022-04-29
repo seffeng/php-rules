@@ -326,6 +326,19 @@ class IDNumber
     /**
      *
      * @author zxf
+     * @date   2022年4月29日
+     * @return \DateInterval
+     */
+    public function getYears()
+    {
+        $startDate = new \DateTime($this->getBirthday());
+        $endDate = new \DateTime(date('Y-m-d'));
+        return $endDate->diff($startDate);
+    }
+
+    /**
+     *
+     * @author zxf
      * @date   2021年7月1日
      * @return string
      */
