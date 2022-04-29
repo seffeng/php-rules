@@ -4,28 +4,28 @@
 
   * 增加密码验证等级
 
-    ```php
-    # 属性
-    /**
-     * 验证正则
-     * @var string
-     */
-    protected $regex
-    /**
-     * 验证等级，基于正则增加验证
-     * [1-仅验证正则，2-相同字符必须小于$number个，3-连续字符必须小于$number个，4-(2、3)]
-     * [2：aa允许，aaa不允许，11允许，111不允许]$number=3
-     * [3：ab允许，abc不允许，12允许，123不允许]$number=3
-     * [4：aa、ab允许，aaa、abc均不允许，11、12允许，111、123均不允许]$number=3
-     * @var string
-     */
-    protected $level = 1;
-    /**
-     * 相同字符和连续字符个数限制
-     * @var string
-     */
-    protected $number = 3;
-    ```
+  ```php
+  # 属性
+  /**
+   * 验证正则
+   * @var string
+   */
+  protected $regex
+  /**
+   * 验证等级，基于正则增加验证
+   * [1-仅验证正则，2-相同字符必须小于$number个，3-连续字符必须小于$number个，4-(2、3)]
+   * [2：aa允许，aaa不允许，11允许，111不允许]$number=3
+   * [3：ab允许，abc不允许，12允许，123不允许]$number=3
+   * [4：aa、ab允许，aaa、abc均不允许，11、12允许，111、123均不允许]$number=3
+   * @var string
+   */
+  protected $level = 1;
+  /**
+   * 相同字符和连续字符个数限制
+   * @var string
+   */
+  protected $number = 3;
+  ```
 
 ---
 
