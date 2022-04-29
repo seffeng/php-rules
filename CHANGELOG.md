@@ -42,7 +42,7 @@
    */
   protected $isStrict = true;
   
-# 方法
+  # 方法
   /**
    * 获取性别[female， male]
    */
@@ -67,5 +67,3 @@
   getYears(): DateInterval
   ```
   
-
-
