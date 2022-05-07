@@ -10,7 +10,7 @@
    * 验证正则
    * @var string
    */
-  protected $regex
+  protected $regex;
   /**
    * 验证等级，基于正则增加验证
    * [1-仅验证正则，2-相同字符必须小于$number个，3-连续字符必须小于$number个，4-(2、3)]
@@ -46,24 +46,24 @@
   /**
    * 获取性别[female， male]
    */
-  getGender():string 
+  public getGender():string 
   /**
    * 获取性别[女， 男]
    */
-  getGenderName():string
+  public getGenderName():string
   /**
    * 获取所属地[XX省XX市XXX]
    */
-  getLocation():string
+  public getLocation():string
   /**
    * 获取出生日期
    */
-  getBirthday():string
+  public getBirthday():string
   /**
    * 获取年龄
    * [y-年,m-月,d-日,days-总天数]
    * [y-2,m-3,d-5,days-827]代表2岁零3月5天，共827天
    */
-  getYears(): DateInterval
+  public getYears(): DateInterval
   ```
   
