@@ -28,6 +28,10 @@ $ composer require seffeng/rules
   public function test()
   {
       $rule = new IDNumber();
+      // 严格模式，验证所属地
+      $rule->setIsStrict(true);
+      // 是否返回所属地
+      $rule->setIsLocation(false);
       $value = '123456789123456789';
       var_dump($rule->passes($value));exit;
   }

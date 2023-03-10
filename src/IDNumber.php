@@ -41,7 +41,13 @@ class IDNumber
      * 是否检测地区（前6位）
      * @var boolean
      */
-    protected $isStrict = true;
+    protected $isStrict = false;
+
+    /**
+     * 是否显示所属地
+     * @var boolean
+     */
+    protected $isLocation = true;
 
     /**
      * 对应位置的加权因子
@@ -190,6 +196,28 @@ class IDNumber
     public function getIsStrict()
     {
         return $this->isStrict;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2023-03-10
+     * @param boolean $isLocation
+     */
+    public function setIsLocation(bool $isLocation)
+    {
+        $this->isLocation = $isLocation;
+    }
+
+    /**
+     *
+     * @author zxf
+     * @date   2023-03-10
+     * @return boolean
+     */
+    public function getIsLocation()
+    {
+        return $this->isLocation;
     }
 
     /**
@@ -387,15 +415,15 @@ class IDNumber
      */
     protected function validLocation()
     {
-        if (!$this->getIsStrict()) {
+        if (!$this->getIsStrict() && !$this->getIsLocation()) {
             return true;
         }
         $code = substr($this->getValue(), 0, 6);
         $items = json_decode(file_get_contents(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'idnumber-location.json'), true);
         if (isset($items[$code])) {
-            $this->setLocation($items[$code]);
+            $this->getIsLocation() && $this->setLocation($items[$code]);
             return true;
         }
-        return false;
+        return !$this->getIsStrict();
     }
 }
