@@ -224,7 +224,7 @@ class IDNumber
      *
      * @author zxf
      * @date   2021年10月28日
-     * @param int $year
+     * @param integer $year
      */
     public function setMinYear(int $year)
     {
@@ -235,7 +235,7 @@ class IDNumber
      *
      * @author zxf
      * @date   2021年10月28日
-     * @return number
+     * @return integer
      */
     public function getMinYear()
     {
@@ -246,7 +246,7 @@ class IDNumber
      *
      * @author zxf
      * @date   2021年10月28日
-     * @param int $year
+     * @param integer $year
      */
     public function setMaxYear(int $year)
     {
@@ -257,7 +257,7 @@ class IDNumber
      *
      * @author zxf
      * @date   2021年10月28日
-     * @return number
+     * @return integer
      */
     public function getMaxYear()
     {
@@ -290,7 +290,7 @@ class IDNumber
      *
      * @author zxf
      * @date   2021年10月28日
-     * @return number
+     * @return integer
      */
     public function getMaxMonth()
     {
@@ -344,7 +344,7 @@ class IDNumber
      *
      * @author zxf
      * @date   2021年10月28日
-     * @return number
+     * @return integer
      */
     public function getMaxDay()
     {

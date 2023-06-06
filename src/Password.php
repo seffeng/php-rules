@@ -109,7 +109,7 @@ class Password
      *
      * @author zxf
      * @date   2022年4月28日
-     * @param int $level
+     * @param integer $level
      */
     public function setNumber(int $number = null)
     {
@@ -121,7 +121,7 @@ class Password
      *
      * @author zxf
      * @date   2022年4月29日
-     * @return number
+     * @return integer
      */
     public function getNumber()
     {
@@ -132,7 +132,7 @@ class Password
      *
      * @author zxf
      * @date   2022年4月28日
-     * @param int $level
+     * @param integer $level
      */
     public function setLevel(int $level = null)
     {
@@ -144,7 +144,7 @@ class Password
      *
      * @author zxf
      * @date   2022年4月29日
-     * @return number
+     * @return integer
      */
     public function getLevel()
     {
@@ -199,7 +199,7 @@ class Password
      *
      * @author zxf
      * @date   2022年4月29日
-     * @return number
+     * @return integer
      */
     protected function getMaxNumber()
     {
