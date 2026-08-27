@@ -109,7 +109,7 @@ class IDNumber
      * @date   2021年7月7日
      * @param string $regex
      */
-    public function __construct(string $regex = null)
+    public function __construct(?string $regex = null)
     {
         if (!is_null($regex) && $regex !== '') {
             $this->regex = $regex;
@@ -180,7 +180,7 @@ class IDNumber
      *
      * @author zxf
      * @date   2021年9月30日
-     * @param bool $strict
+     * @param bool $isStrict
      */
     public function setIsStrict(bool $isStrict)
     {
@@ -319,7 +319,7 @@ class IDNumber
      *
      * @author zxf
      * @date   2022年3月1日
-     * @return string
+     * @return array<string, string>
      */
     public static function fetchGenderItems()
     {

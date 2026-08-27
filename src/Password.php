@@ -64,7 +64,7 @@ class Password
      * @date   2021年7月1日
      * @param string $regex
      */
-    public function __construct(string $regex = null)
+    public function __construct(?string $regex = null)
     {
         if (!is_null($regex) && $regex !== '') {
             $this->regex = $regex;
@@ -109,9 +109,9 @@ class Password
      *
      * @author zxf
      * @date   2022年4月28日
-     * @param integer $level
+     * @param integer $number
      */
-    public function setNumber(int $number = null)
+    public function setNumber(?int $number = null)
     {
         $number > 1 && $this->number = $number;
         return $this;
@@ -134,7 +134,7 @@ class Password
      * @date   2022年4月28日
      * @param integer $level
      */
-    public function setLevel(int $level = null)
+    public function setLevel(?int $level = null)
     {
         $level > 0 && $this->level = $level;
         return $this;
@@ -214,11 +214,9 @@ class Password
      */
     protected function levelII()
     {
-        if (preg_match('/(\d)\1{' . $this->getMaxNumber() . '}/', $this->getValue())) {
-            return true;
-        } elseif (preg_match('/([a-zA-Z])\1{' . $this->getMaxNumber() . '}/', $this->getValue())) {
-            return true;
-        } elseif (preg_match('/([\.\+\-\*\/\?\$\|\^\[\]\{\}\(\)&~!@#<>,;:=])\1{' . $this->getMaxNumber() . '}/', $this->getValue())) {
+        if (preg_match('/(\d)\1{' . $this->getMaxNumber() . '}/', $this->getValue())
+            || preg_match('/([a-zA-Z])\1{' . $this->getMaxNumber() . '}/', $this->getValue())
+            || preg_match('/([\.\+\-\*\/\?\$\|\^\[\]\{\}\(\)&~!@#<>,;:=])\1{' . $this->getMaxNumber() . '}/', $this->getValue())) {
             return true;
         }
         return false;

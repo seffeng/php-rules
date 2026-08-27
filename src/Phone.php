@@ -19,7 +19,7 @@ class Phone
      * @date   2021年7月1日
      * @param string $regex
      */
-    public function __construct(string $regex = null)
+    public function __construct(?string $regex = null)
     {
         if (!is_null($regex) && $regex !== '') {
             $this->regex = $regex;
